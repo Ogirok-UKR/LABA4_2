@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Reflection.Metadata;
+using System.Reflection.Metadata.Ecma335;
 
 public class Communications
 {
@@ -17,18 +19,12 @@ public class Communications
 		Tariffs.Add(Tariff);
 	}
 
-	public void RemoveTariff(string TariffName)
+	public void RemoveTariff(int index)
 	{
-		foreach (Tariff Tariff in Tariffs)
-		{
-			if (Tariff.Name == TariffName)
-			{
-				Tariffs.Remove(Tariff);
-			}
-		}
+		Tariffs.RemoveAt(index);
 	}
 
-	public void RemoveTariff(Tariff Tariff)
+    public void RemoveTariff(Tariff Tariff)
 	{
 		Tariffs.Remove(Tariff);
 	}
@@ -53,21 +49,21 @@ public class Communications
         return new Communications(Tariffs.OrderBy(Tariff => Tariff.Price).Reverse().ToList());
     }
 
-	public Communications OrderByName()
+	public Communications OrderByType()
 	{
-        return new Communications(Tariffs.OrderBy(Tariff => Tariff.Name).ToList());
+        return new Communications(Tariffs.OrderBy(Tariff => Tariff.Type).ToList());
     }
 
     public void PrintTariffs()
 	{
-		Console.WriteLine("┌─────────────────────┬───────────┬───────────┬───────────┬────────────────┐\n" +
-			"│ {0,-20}│ {1,-10}│ {2,-10}│ {3,-10}│ {4,-15}│", "Name","Internet","Minutes","Price","Clients");
-		Console.WriteLine("├─────────────────────┼───────────┼───────────┼───────────┼────────────────┤");
+		Console.WriteLine("┌─────────────────────┬───────────┬───────────┬────────────────┬─────┬───────────┬────────────────┬─────────────────────────────────────────┐\n" +
+            "│ {0,-20}│ {1,-10}│ {2,-10}│ {3,-15}│{7,-5}│ {4,-10}│ {5,-15}│ {6,-40}│", "Name","Internet","Minutes","Rouming","Price","Clients", "Additional Features"," SMS");
+		Console.WriteLine("├─────────────────────┼───────────┼───────────┼────────────────┼─────┼───────────┼────────────────┼─────────────────────────────────────────┤");
 		foreach(Tariff Tariff in Tariffs)
 		{
 			Console.WriteLine(Tariff.ToString());
 		}
-        Console.WriteLine("└─────────────────────┴───────────┴───────────┴───────────┴────────────────┘");
+        Console.WriteLine("└─────────────────────┴───────────┴───────────┴────────────────┴─────┴───────────┴────────────────┴─────────────────────────────────────────┘");
     }
 
 	public Communications SortByPrice(int MinPrice, int MaxPrice)
