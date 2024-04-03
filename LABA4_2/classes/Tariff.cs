@@ -20,6 +20,6 @@ public class Tariff
     public override string ToString()
     {
 		string internet = (Internet != -1) ? $"{Internet}GB" : "Unlimited";
-        return string.Format("│{0,-20}│{1,-10}│{2,-10}│{3,-10}│{4,-15}│", Name,internet,Minutes + " min",Price + " UAH",NumberOfClients + " people");
+        return string.Format("│ {0,-20}│ {1,-10}│ {2,-10}│ {3,-10}│ {4,-15}│", Name, internet, Minutes + " min", Price + " UAH", NumberOfClients + " people");
     }
 }

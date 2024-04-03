@@ -43,45 +43,44 @@ public class Communications
 		return NumberOfClients;
 	}
 
-	public void SortByPriceAscending()
+	public Communications OrderByPriceAscending()
 	{
-        Tariffs = Tariffs.OrderBy(Tariff => Tariff.Price).ToList();
+        return new Communications(Tariffs.OrderBy(Tariff => Tariff.Price).ToList());
 	}
 
-	public void SortByPriceDescending()
+	public Communications OrderByPriceDescending()
 	{
-		this.SortByPriceAscending();
-		Tariffs.Reverse();
-	}
+        return new Communications(Tariffs.OrderBy(Tariff => Tariff.Price).Reverse().ToList());
+    }
 
-	public Communications SortByName()
+	public Communications OrderByName()
 	{
         return new Communications(Tariffs.OrderBy(Tariff => Tariff.Name).ToList());
     }
 
     public void PrintTariffs()
 	{
-		Console.WriteLine("┌────────────────────┬──────────┬──────────┬──────────┬───────────────┐\n" +
-			"│{0,-20}│{1,-10}│{2,-10}│{3,-10}│{4,-15}│", "Name","Internet","Minutes","Price","Clients");
-		Console.WriteLine("├────────────────────┼──────────┼──────────┼──────────┼───────────────┤");
+		Console.WriteLine("┌─────────────────────┬───────────┬───────────┬───────────┬────────────────┐\n" +
+			"│ {0,-20}│ {1,-10}│ {2,-10}│ {3,-10}│ {4,-15}│", "Name","Internet","Minutes","Price","Clients");
+		Console.WriteLine("├─────────────────────┼───────────┼───────────┼───────────┼────────────────┤");
 		foreach(Tariff Tariff in Tariffs)
 		{
 			Console.WriteLine(Tariff.ToString());
 		}
-        Console.WriteLine("└────────────────────┴──────────┴──────────┴──────────┴───────────────┘");
+        Console.WriteLine("└─────────────────────┴───────────┴───────────┴───────────┴────────────────┘");
     }
 
-	public Communications TariffsByPrice(int MinPrice, int MaxPrice)
+	public Communications SortByPrice(int MinPrice, int MaxPrice)
 	{
 		return new Communications(Tariffs.Where(Tariff => Tariff.Price >= MinPrice && Tariff.Price <= MaxPrice).ToList());
     }
 
-    public Communications TariffsByInternet(int MinInternet)
+    public Communications SortByInternet(int MinInternet)
     {
         return new Communications(Tariffs.Where(Tariff => Tariff.Internet >= MinInternet || Tariff.Internet == -1).ToList());
     }
 
-    public Communications TariffsByMinutes(int MinMinutes)
+    public Communications SortByMinutes(int MinMinutes)
     {
         return new Communications(Tariffs.Where(Tariff => Tariff.Minutes >= MinMinutes).ToList());
     }

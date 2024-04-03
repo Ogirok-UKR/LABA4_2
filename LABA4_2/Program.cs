@@ -11,5 +11,5 @@ new Tariff("SuperNet Unlim", -1, 400, 410, 857),
 }
 );
 
-
+communications.SortByPrice(200,400).PrintTariffs();
 
